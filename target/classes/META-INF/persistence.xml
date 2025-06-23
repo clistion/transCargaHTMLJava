@@ -15,8 +15,9 @@
       <property name="jakarta.persistence.jdbc.password" value=""/>
 
       <!-- Hibernate -->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-      <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
+      <!-- MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialec
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>-->
+      <property name="jakarta.persistence.schema-generation.database.action" value="update"/><!--create,update or none-->
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
     </properties>

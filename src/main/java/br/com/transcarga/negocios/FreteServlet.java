@@ -14,11 +14,18 @@ import java.util.List;
 @WebServlet("/FreteServlet")
 public class FreteServlet extends HttpServlet {
 	
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        FreteDAO dao = new FreteDAO();
 	        List<Frete> fretes = dao.listarFretes();
 
-	        response.setContentType("text/html;charset=UTF-8");
+	        request.setCharacterEncoding("UTF-8");
+	        response.setContentType("text/html; charset=UTF-8");
 	        PrintWriter out = response.getWriter();
 	        out.println(" <h2>Lista de Fretes</h2>");
 	       
@@ -30,8 +37,7 @@ public class FreteServlet extends HttpServlet {
 	            out.printf("<tr><td>%d</td><td>%s</td><td>%.2f</td><td>%s</td></tr>",
 	                    f.getId(), f.getDestino(), f.getPeso(), f.getTransportadora());
 	        }
-	        out.println("</tbody></table>");
-	        out.println("<br><br><a href='index.html'>Home</a>");
+	        out.println("</tbody></table>");       
 	   
 	    }
 
@@ -50,6 +56,7 @@ public class FreteServlet extends HttpServlet {
 
         FreteDAO dao = new FreteDAO();
         dao.cadastrarFrete(frete);     
-        response.sendRedirect("index.html");
+        response.sendRedirect("listarFretes.html");
     }
+        
 }
