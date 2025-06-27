@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><title>Cadastrar Usuário</title></head>
+<body>
+  <h2>Cadastro de Usuário</h2>
+  <form action="usuario" method="post">
+    <label>Usuário:</label><input type="text" name="username" required><br><br>
+    <label>Senha:</label><input type="password" name="password" required><br><br>
+    <label>Função:</label>
+    <select name="role">
+      <option value="ADMIN">ADMIN</option>
+      <option value="USER">USER</option>
+    </select><br><br>
+    <button type="submit">Cadastrar</button>
+  </form>
+</body>
+</html>
