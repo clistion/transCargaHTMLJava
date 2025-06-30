@@ -2,7 +2,7 @@ package br.com.transcarga.negocios;
 
 import br.com.transcarga.persistencia.User;
 import br.com.transcarga.persistencia.UserDAO;
-
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
@@ -23,5 +23,19 @@ public class LoginServlet extends HttpServlet {
     } else {
       resp.sendRedirect("login.html?error=1");
     }
+  }
+  
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    
+    // Invalida a sessão do usuário
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+      session.invalidate();
+    }
+
+    // Redireciona para a página de login
+    response.sendRedirect("login.html");
   }
 }

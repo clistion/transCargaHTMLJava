@@ -1,9 +1,13 @@
 package br.com.transcarga.persistencia;
 
 import jakarta.persistence.*;
+
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UserDAO {
+	
   private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("TransCargaPU");
 
   public User autenticar(String username, String password) {
@@ -12,6 +16,8 @@ public class UserDAO {
       TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.username = :u", User.class);
       q.setParameter("u", username);
       User user = q.getSingleResult();
+      System.out.println(user);
+      
       if (BCrypt.checkpw(password, user.getPassword())) {
         return user;
       }
@@ -37,4 +43,17 @@ public class UserDAO {
       em.close();
     }
   }
+  
+  public List<User> listar() {
+	  EntityManager em = emf.createEntityManager();
+	  try {
+	  return em.createQuery("FROM User", User.class).getResultList();
+	  }catch (Exception e) {
+          e.printStackTrace();
+          return List.of(); // retorna lista vazia em caso de erro
+      } finally {
+          if (em != null && em.isOpen()) em.close();
+      }
+	}
+
 }
