@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
   }
   
   @Override
+  //logout
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     

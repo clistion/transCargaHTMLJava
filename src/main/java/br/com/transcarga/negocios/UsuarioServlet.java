@@ -1,8 +1,6 @@
 
 package br.com.transcarga.negocios;
 
-import br.com.transcarga.persistencia.Frete;
-import br.com.transcarga.persistencia.FreteDAO;
 import br.com.transcarga.persistencia.User;
 import br.com.transcarga.persistencia.UserDAO;
 import jakarta.servlet.ServletException;
@@ -13,7 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/usuario")
+@WebServlet(name = "usuario", urlPatterns = {"/usuario","/listarUsuarios.html"})
+//@WebServlet("/usuario")
 public class UsuarioServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -27,7 +26,7 @@ public class UsuarioServlet extends HttpServlet {
     UserDAO dao = new UserDAO();
     dao.cadastrar(username, password, role);
 
-    response.sendRedirect("login.html");
+    response.sendRedirect("listarUsuarios.html");
   }
   
   @Override
@@ -53,6 +52,7 @@ public class UsuarioServlet extends HttpServlet {
 	            out.printf("<tr><td>%s</td><td>%s</td></tr>",
 	                     u.getUsername(), u.getRole());
 	        }
-	        out.println("</tbody></table>");       	   
+	        out.println("</tbody></table>");
+	        out.println("<br><a href='index.html'>Home</a>");  
 	    }
 }

@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/FreteServlet")
+@WebServlet(name = "FreteServlet", urlPatterns = {"/FreteServlet","/listarFretes.html"})
+//@WebServlet("/FreteServlet")
 public class FreteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -32,7 +33,8 @@ public class FreteServlet extends HttpServlet {
 	            out.printf("<tr><td>%d</td><td>%s</td><td>%.2f</td><td>%s</td></tr>",
 	                    f.getId(), f.getDestino(), f.getPeso(), f.getTransportadora());
 	        }
-	        out.println("</tbody></table>");       	   
+	        out.println("</tbody></table>"); 
+	        out.println("<br><a href='index.html'>Home</a>");  
 	    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
