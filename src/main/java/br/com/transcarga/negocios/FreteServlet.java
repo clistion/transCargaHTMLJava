@@ -34,7 +34,8 @@ public class FreteServlet extends HttpServlet {
 	                    f.getId(), f.getDestino(), f.getPeso(), f.getTransportadora());
 	        }
 	        out.println("</tbody></table>"); 
-	        out.println("<br><a href='index.html'>Home</a>");  
+	        out.println("<br><a href='index.html'>Home</a>"); 
+	        out.println("<a href='login.html'>Logout</a>");
 	    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

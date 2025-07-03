@@ -10,9 +10,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "HomeServlet", urlPatterns = {"/index.html"})
 //@WebServlet("HomeServlet")
 public class HomeServlet extends HttpServlet {
-  /**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 1L;
 
   @Override
@@ -22,7 +20,6 @@ public class HomeServlet extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     
-  
     out.println("  <h1>Bem-vindo ao sistema TransCarga</h1>");
     out.println("  <ul>");
     out.println("    <li><a href='cadastrarFrete.html'>Cadastrar Frete</a></li>");
