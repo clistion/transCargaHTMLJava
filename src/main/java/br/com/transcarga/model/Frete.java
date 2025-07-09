@@ -1,18 +1,17 @@
-package br.com.transcarga.persistencia;
+package br.com.transcarga.model;
 
 import jakarta.persistence.*;
 
 @Entity
 public class Frete {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String destino;
     private double peso;
     private String transportadora;
 
+    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
