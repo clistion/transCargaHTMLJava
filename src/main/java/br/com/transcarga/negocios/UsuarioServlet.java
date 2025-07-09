@@ -27,6 +27,7 @@ public class UsuarioServlet extends HttpServlet {
     dao.cadastrar(username, password, role);
 
     response.sendRedirect("listarUsuarios.html");
+  
   }
   
   @Override
