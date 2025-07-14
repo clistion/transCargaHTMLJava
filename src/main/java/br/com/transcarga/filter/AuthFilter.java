@@ -22,7 +22,7 @@ public class AuthFilter implements Filter {
         // Caminhos públicos que não exigem login
         boolean isLoginPath = path.endsWith("/login.html") || 
                               path.endsWith("/login") ||
-                              path.startsWith("/transcarga/auth");
+                              path.startsWith("/auth");
 
         boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
 

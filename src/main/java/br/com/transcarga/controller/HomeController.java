@@ -24,7 +24,7 @@ public class HomeController {
                "    <li><a href='listarFretes.html'>Listar Fretes</a></li>" +
                "    <li><a href='cadastrarUsuario.html'>Cadastrar Usuário</a></li>" +
                "    <li><a href='listarUsuarios.html'>Listar Usuários</a></li>" +
-               "    <li><a href='logout'>Logout</a></li>" +
+               "    <li><a href='/auth/logout'>Logout</a></li>" +
                "  </ul>" +
                "</body>" +
                "</html>";

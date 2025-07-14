@@ -28,8 +28,9 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
-        session.invalidate();
-        response.sendRedirect("/login.html");
+    public ResponseEntity<Void> logout(HttpSession session, HttpServletResponse response) throws IOException {
+        session.invalidate(); // Encerra a sessão
+        response.sendRedirect("/login.html"); // Redireciona para a página de login
+        return ResponseEntity.ok().build();
     }
 }
