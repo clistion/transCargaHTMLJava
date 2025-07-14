@@ -1,1 +1,38 @@
-<h2>Página de Login</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login TransCarga</title>
+  <script>
+    async function onSubmit(evt) {
+      evt.preventDefault();
+      const form = evt.target;
+      const data = new URLSearchParams(new FormData(form));
+      const res = await fetch('auth/login', {
+        method: 'POST',
+        body: data
+      });
+      if (res.ok) {
+    	  //Login bem-sucedido → redirecionar para home
+          window.location.href = "/";
+      } else {
+    	//Login inválido → exibir erro
+          alert("Usuário ou senha inválidos");
+      }
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('loginForm').addEventListener('submit', onSubmit);
+    });
+  </script>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <label>Usuário:</label><br>
+    <input type="text" name="username" required><br><br>
+    <label>Senha:</label><br>
+    <input type="password" name="password" required><br><br>
+    <button type="submit">Entrar</button>
+  </form>
+</body>
+</html>

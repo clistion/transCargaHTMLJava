@@ -1,1 +1,47 @@
-<h2>Cadastrar Usuário</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Usuário</title>
+  <script>
+    async function onSubmit(evt) {
+      evt.preventDefault();
+      const form = evt.target;
+      const user = {
+        username: form.username.value,
+        password: form.password.value,
+        role: form.role.value
+      };
+      const res = await fetch('users/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      });
+      if (res.ok) {
+        alert('Usuário cadastrado com sucesso');
+        window.location.href = 'login.html';
+      } else {
+        alert('Erro ao cadastrar usuário');
+      }
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('userForm').addEventListener('submit', onSubmit);
+    });
+  </script>
+</head>
+<body>
+  <h2>Cadastro de Usuário</h2>
+  <form id="userForm">
+    <label>Usuário:</label><br>
+    <input type="text" name="username" required><br><br>
+    <label>Senha:</label><br>
+    <input type="password" name="password" required><br><br>
+    <label>Função:</label><br>
+    <select name="role">
+      <option value="USER">USER</option>
+      <option value="ADMIN">ADMIN</option>
+    </select><br><br>
+    <button type="submit">Cadastrar</button>
+  </form>
+</body>
+</html>

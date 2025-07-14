@@ -1,8 +1,19 @@
 package br.com.transcarga.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "fretes")
 public class Frete {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,16 +22,6 @@ public class Frete {
     private double peso;
     private String transportadora;
 
-    // Getters e Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getDestino() { return destino; }
-    public void setDestino(String destino) { this.destino = destino; }
-
-    public double getPeso() { return peso; }
-    public void setPeso(double peso) { this.peso = peso; }
-
-    public String getTransportadora() { return transportadora; }
-    public void setTransportadora(String transportadora) { this.transportadora = transportadora; }
+    // Getters e Setters criados pelo Lombok
+  
 }

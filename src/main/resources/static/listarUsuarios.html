@@ -1,1 +1,39 @@
-<h2>Listar Usuários</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Listar Usuários</title>
+  <script>
+    async function loadUsers() {
+      try {
+        const res = await fetch('users/list');
+        const list = await res.json();
+        const tbody = document.getElementById('userBody');
+        tbody.innerHTML = '';
+        list.forEach(u => {
+          const row = `<tr>
+            <td>${u.username}</td>
+            <td>${u.role}</td>
+          </tr>`;
+          tbody.insertAdjacentHTML('beforeend', row);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', loadUsers);
+  </script>
+</head>
+<body>
+  <h2>Lista de Usuários</h2>
+  <table border="1">
+    <thead>
+      <tr><th>Usuário</th><th>Função</th></tr>
+    </thead>
+    <tbody id="userBody">
+      <tr><td colspan="2">Carregando...</td></tr>
+    </tbody>
+  </table>
+  <p><a href="cadastrarUsuario.html">Novo Usuário</a> | <a href="listarFretes.html">Listar Fretes</a> | <a href="logout">Logout</a></p>
+</body>
+</html>

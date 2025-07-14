@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS users (
   role VARCHAR(50) NOT NULL
 );
 INSERT INTO users (username, password, role)
-VALUES ('admin', 'admin123', 'ADMIN');
+VALUES ('lima', '$2a$12$qwHVWNpAsVKpllfL/ZVIpO1gwUvpz1I3Y1pEoZVUhKRNWr0aiqjNG', 'ADMIN');

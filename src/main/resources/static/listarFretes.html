@@ -1,1 +1,41 @@
-<h2>Listar Fretes</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Listar Fretes</title>
+  <script>
+    async function loadFretes() {
+      try {
+        const res = await fetch('fretes/list');
+        const list = await res.json();
+        const tbody = document.getElementById('freteBody');
+        tbody.innerHTML = '';
+        list.forEach(f => {
+          const row = `<tr>
+            <td>${f.id}</td>
+            <td>${f.destino}</td>
+            <td>${f.peso.toFixed(2)}</td>
+            <td>${f.transportadora}</td>
+          </tr>`;
+          tbody.insertAdjacentHTML('beforeend', row);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', loadFretes);
+  </script>
+</head>
+<body>
+  <h2>Lista de Fretes</h2>
+  <table border="1">
+    <thead>
+      <tr><th>ID</th><th>Destino</th><th>Peso</th><th>Transportadora</th></tr>
+    </thead>
+    <tbody id="freteBody">
+      <tr><td colspan="4">Carregando...</td></tr>
+    </tbody>
+  </table>
+  <p><a href="cadastrarFrete.html">Novo Frete</a> | <a href="listarUsuarios.html">Listar Usuários</a> | <a href="logout">Logout</a></p>
+</body>
+</html>
