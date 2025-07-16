@@ -21,7 +21,5 @@ public class Frete {
     private String destino;
     private double peso;
     private String transportadora;
-
-    // Getters e Setters criados pelo Lombok
-  
+    // Getters e Setters criados pelo Lombok 
 }
