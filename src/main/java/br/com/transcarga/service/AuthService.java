@@ -13,17 +13,21 @@ public class AuthService {
     private UserRepository userRepo;
 
     public User login(String username, String password) {
-        return userRepo.findByUsername(username)
+    	System.out.println(username);
+    	System.out.println(password);  
+    	
+    	return userRepo.findByUsername(username)
                 .filter(user -> BCrypt.checkpw(password, user.getPassword()))
-                .orElse(null);
+                .orElse(null);    	
     }
 
     public void register(String username, String password, String role) {
-        String hash = BCrypt.hashpw(password, BCrypt.gensalt());
+        	
+    	String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
         User user = new User();
         user.setUsername(username);
         user.setPassword(hash);
         user.setRole(role);
-        userRepo.save(user);
+        userRepo.save(user);        	 	
     }
 }

@@ -22,9 +22,9 @@ public class AuthController {
         User user = auth.login(username, password);
         if (user != null) {
             session.setAttribute("user", user);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(user.getRole()); // retorna o tipo do usuário
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
     }
 
     @GetMapping("/logout")

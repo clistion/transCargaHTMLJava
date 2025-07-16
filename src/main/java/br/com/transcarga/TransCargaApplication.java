@@ -9,6 +9,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 public class TransCargaApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TransCargaApplication.class, args);
+        SpringApplication.run(TransCargaApplication.class, args);             
     }
 }
