@@ -1,35 +1,49 @@
 package br.com.transcarga.filter;
-
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import java.io.IOException;
+import br.com.transcarga.model.User;
 
 @WebFilter("/*")
 public class AuthFilter implements Filter {
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
+	
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    HttpServletRequest req = (HttpServletRequest) request;
+    HttpServletResponse resp = (HttpServletResponse) response;
+    String uri = req.getRequestURI();
         
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        HttpSession session = req.getSession(false);
-        String path = req.getRequestURI();
-
-        // Caminhos públicos que não exigem login
-        boolean isLoginPath = path.endsWith("/login.html") || 
-                              path.endsWith("/login") ||
-                              path.startsWith("/auth");
-
-        boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
-
-        if (isLoggedIn || isLoginPath) {
-            chain.doFilter(request, response);
-        } else {
-            res.sendRedirect("login.html");
-        }
+    //Libera páginas públicas
+    if (uri.endsWith("login") || uri.endsWith("login.html")) {
+      chain.doFilter(request, response);
+      return;
     }
+
+    HttpSession session = req.getSession(false);
+    User usuario = (session != null) ? (User) session.getAttribute("user") : null;
+    
+    if (usuario == null) {
+        resp.sendRedirect("login.html");
+        return;
+      }
+
+      // RESTRIÇÃO POR PAPEL
+      String role = usuario.getRole(); // "USER" ou "ADMIN"
+
+      if ("USER".equals(role)) {
+        // Usuário comum só pode acessar a página de listar fretes e logout
+        if (uri.contains("listarFretes") || uri.contains("logout")) {
+          chain.doFilter(request, response);
+        } else {
+          // Força redirecionamento para página de fretes
+          resp.sendRedirect("listarFretes.html");
+        }
+      } else if ("ADMIN".equals(role)) {
+        // Admin tem acesso a tudo
+        chain.doFilter(request, response);
+      } else {
+        // Papel desconhecido
+        resp.sendRedirect("login.html");
+      }
+  }  
 }
